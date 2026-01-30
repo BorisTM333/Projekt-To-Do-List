@@ -1,95 +1,65 @@
-body{
-    background: rgb(0,0,0);
-    background: radial-gradient(circle, rgb(228, 186, 255, 0.5) 0%, rgb(155, 188, 255, 0.5) 100%);
-    font-family: "Courier New", "Lucida Console", monospace;
+body {
+    background: radial-gradient(circle, rgba(228,186,255,0.5) 0%, rgba(155,188,255,0.5) 100%);
+    font-family: "Courier New", monospace;
     text-align: center;
     margin-top: 50px;
 }
 
-.todoContainer{
+#todoContainer {
     background: rgba(0, 0, 0, 0.5);
     width: 400px;
-    margin: 0 auto;
+    margin: auto;
     border: 2px solid #0033ff;
     padding: 20px;
     color: white;
     border-radius: 15px;
 }
 
-#inputBox{
-    width: 200px;
-    padding: 10px;
-    border: 1px solid #ea00ff;
-    border-radius: 5px;
-    margin-right: 5px;
-    font-size: 20px;
-}
-#inputButton{
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.4s;
-    padding: 10px;
-    border: 2.5px solid rgba(149, 0, 255, 0.592);
-    border-radius: 5px;
-    background-color: #c7e1ff9b;
-}
-
-.taskButton{
-    background: rgb(12, 124, 251);
-    border-radius: 5px;
-    margin: 0px 5px;
-    padding: 3px 5px;
-    border: none;
-    cursor: pointer;
-    color: white;
-    float: right;
-}
-
-hr{
-    border: 5px solid rgba(187, 0, 255, 0.125);
-}
-
-#header{
-    margin: 5px;
-    font-size: 20px;
-    text-align: center;
-}
-
-h1{
+#header {
     margin-bottom: 20px;
 }
 
-#input-button:hover {
+#inputBox {
+    width: 200px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+#inputButton {
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#inputButton:hover {
     background-color: #9eb7fd;
 }
 
-ul{
+ul {
     list-style: none;
     padding: 0;
     margin-top: 20px;
-    text-align:left;
+    text-align: left;
 }
 
 li {
     border: 1px solid white;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin: 10px 0;
     padding: 10px;
-    margin-top: 10px;
 }
 
-.edit-btn, .delete-btn, .complete-btn{
+.editBtn,
+.deleteBtn {
     float: right;
-    color:rgba(255, 0, 0, 0.75);
     cursor: pointer;
-    margin: 3px 5px;
-    border: none;
-    padding: 3px 5px;
-    background: none;
+    margin-left: 10px;
+    color: #ff6b6b;
 }
 
 .completed {
     text-decoration: line-through;
     color: gray;
-    border: 1px solid gray;
+    border-color: gray;
 }

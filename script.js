@@ -4,58 +4,52 @@ const completedCounter = document.getElementById("completedCounter");
 const uncompletedCounter = document.getElementById("uncompletedCounter");
 
 function updateCounters() {
-    const completedTasks = document.querySelectorAll(".completed").length;
-    const uncompletedTasks = document.querySelectorAll("li:not(.completed)").length;
-
-    completedCounter.textContent = completedTasks;
-    uncompletedCounter.textContent = uncompletedTasks;
+    const completed = document.querySelectorAll(".completed").length;
+    const uncompleted = document.querySelectorAll("li:not(.completed)").length;
+    completedCounter.textContent = completed;
+    uncompletedCounter.textContent = uncompleted;
 }
 
 function addTask() {
-    const task = inputBox.value.trim();
-    if (!task) {
-        alert("Wpisz zadanie");
-        return;
-    }
+    const text = inputBox.value.trim();
+    if (!text) return;
 
     const li = document.createElement("li");
     li.innerHTML = `
-    <label>
-      <input type="checkbox">
-      <span>${task}</span>
-    </label>
-    <span class="editBtn">Edytuj</span>
-    <span class="deleteBtn">Usun</span>
-  `;
+        <label>
+            <input type="checkbox">
+            <span>${text}</span>
+        </label>
+        <span class="editBtn">Edytuj</span>
+        <span class="deleteBtn">Usuń</span>
+    `;
 
     listContainer.appendChild(li);
     inputBox.value = "";
 
     const checkbox = li.querySelector("input");
+    const taskSpan = li.querySelector("span");
     const editBtn = li.querySelector(".editBtn");
-    const taskSpan = li.querySelector("label span");
     const deleteBtn = li.querySelector(".deleteBtn");
 
-    checkbox.addEventListener("click", () => {
+    checkbox.addEventListener("change", () => {
         li.classList.toggle("completed", checkbox.checked);
         updateCounters();
     });
 
     editBtn.addEventListener("click", () => {
-        const update = prompt("Edit task:", taskSpan.textContent);
-        if (update !== null) {
-            taskSpan.textContent = update;
-            li.classList.remove("completed");
+        const updated = prompt("Edytuj zadanie:", taskSpan.textContent);
+        if (updated !== null) {
+            taskSpan.textContent = updated;
             checkbox.checked = false;
+            li.classList.remove("completed");
             updateCounters();
         }
     });
 
     deleteBtn.addEventListener("click", () => {
-        if (confirm("Czy napewno chcesz usunac to zadanie?")) {
-            li.remove();
-            updateCounters();
-        }
+        li.remove();
+        updateCounters();
     });
 
     updateCounters();
