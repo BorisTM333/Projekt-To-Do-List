@@ -6,8 +6,8 @@ body{
     margin-top: 50px;
 }
 
-.todo-container{
-    background: rgb(41, 33, 33);
+.todoContainer{
+    background: rgba(0, 0, 0, 0.5);
     width: 400px;
     margin: 0 auto;
     border: 2px solid #0033ff;
@@ -16,7 +16,7 @@ body{
     border-radius: 15px;
 }
 
-#input-box{
+#inputBox{
     width: 200px;
     padding: 10px;
     border: 1px solid #ea00ff;
@@ -24,7 +24,7 @@ body{
     margin-right: 5px;
     font-size: 20px;
 }
-#input-button{
+#inputButton{
     font-size: 20px;
     cursor: pointer;
     transition: 0.4s;
@@ -34,7 +34,7 @@ body{
     background-color: #c7e1ff9b;
 }
 
-.task button{
+.taskButton{
     background: rgb(12, 124, 251);
     border-radius: 5px;
     margin: 0px 5px;
