@@ -1,7 +1,7 @@
-const inputBox = document.getElementById("input-box");
-const listContainer = document.getElementById("list-container");
-const completedCounter = document.getElementById("completed-counter");
-const uncompletedCounter = document.getElementById("uncompleted-counter");
+const inputBox = document.getElementById("inputBox");
+const listContainer = document.getElementById("listContainer");
+const completedCounter = document.getElementById("completedCounter");
+const uncompletedCounter = document.getElementById("uncompletedCounter");
 
 function updateCounters() {
     const completedTasks = document.querySelectorAll(".completed").length;
@@ -14,7 +14,7 @@ function updateCounters() {
 function addTask() {
     const task = inputBox.value.trim();
     if (!task) {
-        alert("Please write down a task");
+        alert("Wpisz zadanie");
         return;
     }
 
@@ -24,17 +24,17 @@ function addTask() {
       <input type="checkbox">
       <span>${task}</span>
     </label>
-    <span class="edit-btn">Edit</span>
-    <span class="delete-btn">Delete</span>
+    <span class="editBtn">Edytuj</span>
+    <span class="deleteBtn">Usun</span>
   `;
 
     listContainer.appendChild(li);
     inputBox.value = "";
 
     const checkbox = li.querySelector("input");
-    const editBtn = li.querySelector(".edit-btn");
+    const editBtn = li.querySelector(".editBtn");
     const taskSpan = li.querySelector("label span");
-    const deleteBtn = li.querySelector(".delete-btn");
+    const deleteBtn = li.querySelector(".deleteBtn");
 
     checkbox.addEventListener("click", () => {
         li.classList.toggle("completed", checkbox.checked);
@@ -52,7 +52,7 @@ function addTask() {
     });
 
     deleteBtn.addEventListener("click", () => {
-        if (confirm("Are you sure you want to delete this task?")) {
+        if (confirm("Czy napewno chcesz usunac to zadanie?")) {
             li.remove();
             updateCounters();
         }
@@ -60,9 +60,3 @@ function addTask() {
 
     updateCounters();
 }
-
-inputBox.addEventListener("keyup", (event) => {
-    if (event.key === "Enter") {
-        addTask();
-    }
-});
