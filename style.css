@@ -1,18 +1,23 @@
 body {
-    background: radial-gradient(circle, rgba(228,186,255,0.5) 0%, rgba(155,188,255,0.5) 100%);
+    background: radial-gradient(circle, rgba(191,255,255,0.5) 0%, rgba(128,128,191,0.5) 100%);
     font-family: "Courier New", monospace;
     text-align: center;
     margin-top: 50px;
 }
 
 #todoContainer {
-    background: rgba(0, 0, 0, 0.5);
-    width: 400px;
-    margin: auto;
-    border: 2px solid #0033ff;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.25) 100%,rgba(128,128,128,0.75) 0%);
+    width: 400px; margin: auto;
     padding: 20px;
     color: white;
     border-radius: 15px;
+    animation: sway 10s ease-in-out infinite;
+}
+@keyframes sway {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(0.8px) translateY(-0.4px); }
+    50% { transform: translateX(0) translateY(-1px); } 75% { transform: translateX(-0.8px) translateY(-0.4px); }
+    100% { transform: translateX(0) translateY(0); }
 }
 
 #header {
@@ -23,17 +28,26 @@ body {
     width: 200px;
     padding: 10px;
     font-size: 18px;
+    border: 2.5px solid rgba(128,128,191,0.5);
     border-radius: 5px;
+    background: radial-gradient(circle, rgba(191,255,255,0.5) 75%, rgba(128,128,191,0.5) 100%);
+    animation: sway 10s ease-in-out infinite;
 }
 
 #inputButton {
     font-size: 18px;
     padding: 10px;
     cursor: pointer;
+    border: 2.5px solid rgba(128,128,191,0.5);
+    border-radius: 5px;
+    background: radial-gradient(circle, rgba(191,255,255,0.5) 75%, rgba(128,128,191,0.5) 100%);
+    animation: sway 10s ease-in-out infinite;
 }
 
 #inputButton:hover {
-    background-color: #9eb7fd;
+    border: 2.5px solid rgba(128,128,191,0.5);
+    border-radius: 7.5px;
+    animation: sway 10s ease-in-out infinite;
 }
 
 ul {
@@ -41,25 +55,68 @@ ul {
     padding: 0;
     margin-top: 20px;
     text-align: left;
+    font-weight: 700;
 }
 
 li {
-    border: 1px solid white;
+    border: 2.5px solid rgba(128,128,191,0.5);
     border-radius: 5px;
     margin: 10px 0;
     padding: 10px;
+    font-weight: 700;
 }
 
-.editBtn,
+.editBtn{
+    float: right;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #9ff91a;
+    font-weight: 600;
+}
+
 .deleteBtn {
     float: right;
     cursor: pointer;
     margin-left: 10px;
-    color: #ff6b6b;
+    color: #ff1a1a;
+    font-weight: 700;
 }
 
 .completed {
     text-decoration: line-through;
-    color: gray;
-    border-color: gray;
+    color: #9ff91a;
+    border-color: #9ff91a;
+    font-weight: 700;
+}
+
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 4px;
+    background: radial-gradient(circle, rgba(191,255,255,0.5) 0%, rgba(128,128,191,0.5) 100%);
+    cursor: pointer;
+    position: relative;
+    transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+
+input[type="checkbox"]:checked {
+    background: rgba(191,255,191,0.6);
+    border-color: #9ff91a;
+}
+
+
+input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    width: 6px;
+    height: 12px;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+    transform: rotate(45deg);
 }
