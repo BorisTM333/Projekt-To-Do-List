@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>TO-DO List</title>
+    <title>Moja Lista Zadań</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
     </div>
 
     <div id="todoForm">
-        <input type="text" id="inputBox" placeholder="Dodaj zadanie...">
+        <input type="text" id="inputBox" placeholder="Wpisz zadanie...">
         <select id="priorityInput">
             <option value="Normalny">Normalny</option>
             <option value="Wysoki">Wysoki</option>
@@ -23,20 +23,21 @@
     </div>
 
     <div id="controls">
-        <input type="text" id="searchBox" placeholder="Szukaj zadania..." onkeyup="render()">
+        <input type="text" id="searchBox" placeholder="Szukaj..." onkeyup="render()">
         <div class="filter-buttons">
             <button onclick="setFilter('all')">Wszystkie</button>
-            <button onclick="setFilter('done')">Ukończone</button>
-            <button onclick="sortData('date')">Sortuj po dacie</button>
+            <button onclick="setFilter('done')">Tylko gotowe</button>
+            <button onclick="sortData('date')">Sortuj datami</button>
         </div>
     </div>
 
-    <h2>Lista zadań</h2>
+    <h2>Zadania:</h2>
     <ul id="listContainer"></ul>
 
     <div class="counterContainer">
-        Ukończone: <span id="completedCounter">0</span> |
-        Nieukończone: <span id="uncompletedCounter">0</span>
+        Gotowe: <span id="completedCounter">0</span> |
+        Do zrobienia: <span id="uncompletedCounter">0</span> |
+        Postęp: <span id="procent">0%</span>
     </div>
 </div>
 

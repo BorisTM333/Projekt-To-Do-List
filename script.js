@@ -6,10 +6,11 @@ function addTask() {
     var p = document.getElementById("priorityInput").value;
     var d = document.getElementById("dateInput").value;
 
-    if (t == ""){
-        return alert("Wpisz coś...");
+    if (t == "") {
+        alert("Wpisz treść zadania");
+        return;
     }
-    
+
     var obj = {
         id: Math.random(),
         txt: t,
@@ -23,19 +24,29 @@ function addTask() {
     render();
 }
 
+function sortujPrio() {
+    zadania.sort(function(a, b) {
+        if (a.prio === "Wysoki" && b.prio === "Normalny") return -1;
+        if (a.prio === "Normalny" && b.prio === "Wysoki") return 1;
+        return 0;
+    });
+}
+
 function render() {
+    sortujPrio(); 
+
     var lista = document.getElementById("listContainer");
     lista.innerHTML = "";
     var szukaj = document.getElementById("searchBox").value.toLowerCase();
-    
+
     for (var i = 0; i < zadania.length; i++) {
         var z = zadania[i];
-        
+
         if (z.txt.toLowerCase().indexOf(szukaj) == -1) continue;
 
         var li = document.createElement("li");
         if (z.spr) li.className = "completed";
-        
+
         li.innerHTML = '<input type="checkbox" ' + (z.spr ? "checked" : "") + ' onclick="klik(' + z.id + ')">' +
             '<div class="task-content"><b>' + z.txt + '</b><br><small>' + z.prio + ' | ' + z.data + '</small></div>' +
             '<span class="editBtn" onclick="edytuj(' + z.id + ')">Edytuj</span>' +
@@ -68,10 +79,19 @@ function usun(id) {
 function edytuj(id) {
     for (var i = 0; i < zadania.length; i++) {
         if (zadania[i].id == id) {
-            var n = prompt("Nowa nazwa:", zadania[i].txt);
+            var n = prompt("Zmień nazwę zadania:", zadania[i].txt);
             if (n) zadania[i].txt = n;
         }
     }
+    render();
+}
+
+function sortData() {
+    zadania.sort(function(a, b) {
+        var d1 = new Date(a.data);
+        var d2 = new Date(b.data);
+        return d1 - d2;
+    });
     render();
 }
 
@@ -80,17 +100,24 @@ function licz() {
     for (var i = 0; i < zadania.length; i++) {
         if (zadania[i].spr) ok++;
     }
+
+    var wynik_proc = 0;
+    if (zadania.length > 0) {
+        wynik_proc = (ok / zadania.length) * 100;
+    }
+
     document.getElementById("completedCounter").innerHTML = ok;
     document.getElementById("uncompletedCounter").innerHTML = zadania.length - ok;
+    document.getElementById("procent").innerHTML = Math.round(wynik_proc) + "%";
 }
 
 function setFilter(f) {
-    var wszystkie = document.querySelectorAll("#listContainer li");
-    for (var i = 0; i < wszystkie.length; i++) {
-        if (f == 'done' && !wszystkie[i].classList.contains("completed")) {
-            wszystkie[i].style.display = "none";
+    var li = document.querySelectorAll("#listContainer li");
+    for (var i = 0; i < li.length; i++) {
+        if (f == 'done' && !li[i].classList.contains("completed")) {
+            li[i].style.display = "none";
         } else {
-            wszystkie[i].style.display = "flex";
+            li[i].style.display = "block";
         }
     }
 }
