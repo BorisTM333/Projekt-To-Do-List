@@ -11,13 +11,7 @@ body {
     padding: 20px;
     color: white;
     border-radius: 15px;
-    animation: sway 10s ease-in-out infinite;
 }
-@keyframes sway {
-    0% { transform: translateX(0) translateY(0); }
-    25% { transform: translateX(0.8px) translateY(-0.4px); }
-    50% { transform: translateX(0) translateY(-1px); } 75% { transform: translateX(-0.8px) translateY(-0.4px); }
-    100% { transform: translateX(0) translateY(0); }
 }
 
 #header {
@@ -31,7 +25,6 @@ body {
     border: 2.5px solid rgba(128,128,191,0.5);
     border-radius: 5px;
     background: radial-gradient(circle, rgba(191,255,255,0.5) 75%, rgba(128,128,191,0.5) 100%);
-    animation: sway 10s ease-in-out infinite;
 }
 
 #inputButton {
@@ -41,13 +34,11 @@ body {
     border: 2.5px solid rgba(128,128,191,0.5);
     border-radius: 5px;
     background: radial-gradient(circle, rgba(191,255,255,0.5) 75%, rgba(128,128,191,0.5) 100%);
-    animation: sway 10s ease-in-out infinite;
 }
 
 #inputButton:hover {
     border: 2.5px solid rgba(128,128,191,0.5);
     border-radius: 7.5px;
-    animation: sway 10s ease-in-out infinite;
 }
 
 ul {
