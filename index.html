@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>TO-DO List</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>TO-DO List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="todoContainer">
-  <div id="header">
-    <h1>To Do List</h1>
-  </div>
+    <div id="header">
+        <h1>To Do List</h1>
+    </div>
 
-  <div id="todoForm">
-    <input type="text" id="inputBox" placeholder="Dodaj zadanie">
-    <button id="inputButton" onclick="addTask()">Dodaj</button>
-  </div>
+    <div id="todoForm">
+        <input type="text" id="inputBox" placeholder="Dodaj zadanie...">
+        <select id="priorityInput">
+            <option value="Normalny">Normalny</option>
+            <option value="Wysoki">Wysoki</option>
+        </select>
+        <input type="date" id="dateInput">
+        <button id="inputButton" onclick="addTask()">Dodaj</button>
+    </div>
 
-  <h2>Lista zadań</h2>
-  <ul id="listContainer"></ul>
+    <div id="controls">
+        <input type="text" id="searchBox" placeholder="Szukaj zadania..." onkeyup="render()">
+        <div class="filter-buttons">
+            <button onclick="setFilter('all')">Wszystkie</button>
+            <button onclick="setFilter('done')">Ukończone</button>
+            <button onclick="sortData('date')">Sortuj po dacie</button>
+        </div>
+    </div>
 
-  <div class="counterContainer">
-    Ukończone: <span id="completedCounter">0</span> |
-    Nieukończone: <span id="uncompletedCounter">0</span>
-  </div>
+    <h2>Lista zadań</h2>
+    <ul id="listContainer"></ul>
+
+    <div class="counterContainer">
+        Ukończone: <span id="completedCounter">0</span> |
+        Nieukończone: <span id="uncompletedCounter">0</span>
+    </div>
 </div>
 
 <script src="script.js"></script>

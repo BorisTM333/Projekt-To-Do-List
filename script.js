@@ -1,56 +1,96 @@
-const inputBox = document.getElementById("inputBox");
-const listContainer = document.getElementById("listContainer");
-const completedCounter = document.getElementById("completedCounter");
-const uncompletedCounter = document.getElementById("uncompletedCounter");
-
-function updateCounters() {
-    const completed = document.querySelectorAll(".completed").length;
-    const uncompleted = document.querySelectorAll("li:not(.completed)").length;
-    completedCounter.textContent = completed;
-    uncompletedCounter.textContent = uncompleted;
-}
+var zadania = [];
 
 function addTask() {
-    const text = inputBox.value.trim();
-    if (!text) return;
+    var pole = document.getElementById("inputBox");
+    var t = pole.value;
+    var p = document.getElementById("priorityInput").value;
+    var d = document.getElementById("dateInput").value;
 
-    const li = document.createElement("li");
-    li.innerHTML = `
-        <label>
-            <input type="checkbox">
-            <span>${text}</span>
-        </label>
-        <span class="editBtn">Edytuj</span>
-        <span class="deleteBtn">Usuń</span>
-    `;
+    if (t == ""){
+        return alert("Wpisz coś...");
+    }
+    
+    var obj = {
+        id: Math.random(),
+        txt: t,
+        prio: p,
+        data: d,
+        spr: false
+    };
 
-    listContainer.appendChild(li);
-    inputBox.value = "";
+    zadania.push(obj);
+    pole.value = "";
+    render();
+}
 
-    const checkbox = li.querySelector("input");
-    const taskSpan = li.querySelector("span");
-    const editBtn = li.querySelector(".editBtn");
-    const deleteBtn = li.querySelector(".deleteBtn");
+function render() {
+    var lista = document.getElementById("listContainer");
+    lista.innerHTML = "";
+    var szukaj = document.getElementById("searchBox").value.toLowerCase();
+    
+    for (var i = 0; i < zadania.length; i++) {
+        var z = zadania[i];
+        
+        if (z.txt.toLowerCase().indexOf(szukaj) == -1) continue;
 
-    checkbox.addEventListener("change", () => {
-        li.classList.toggle("completed", checkbox.checked);
-        updateCounters();
-    });
+        var li = document.createElement("li");
+        if (z.spr) li.className = "completed";
+        
+        li.innerHTML = '<input type="checkbox" ' + (z.spr ? "checked" : "") + ' onclick="klik(' + z.id + ')">' +
+            '<div class="task-content"><b>' + z.txt + '</b><br><small>' + z.prio + ' | ' + z.data + '</small></div>' +
+            '<span class="editBtn" onclick="edytuj(' + z.id + ')">Edytuj</span>' +
+            '<span class="deleteBtn" onclick="usun(' + z.id + ')">X</span>';
 
-    editBtn.addEventListener("click", () => {
-        const updated = prompt("Edytuj zadanie:", taskSpan.textContent);
-        if (updated !== null) {
-            taskSpan.textContent = updated;
-            checkbox.checked = false;
-            li.classList.remove("completed");
-            updateCounters();
+        lista.appendChild(li);
+    }
+    licz();
+}
+
+function klik(id) {
+    for (var i = 0; i < zadania.length; i++) {
+        if (zadania[i].id == id) {
+            zadania[i].spr = !zadania[i].spr;
         }
-    });
+    }
+    render();
+}
 
-    deleteBtn.addEventListener("click", () => {
-        li.remove();
-        updateCounters();
-    });
+function usun(id) {
+    for (var i = 0; i < zadania.length; i++) {
+        if (zadania[i].id == id) {
+            zadania.splice(i, 1);
+            break;
+        }
+    }
+    render();
+}
 
-    updateCounters();
+function edytuj(id) {
+    for (var i = 0; i < zadania.length; i++) {
+        if (zadania[i].id == id) {
+            var n = prompt("Nowa nazwa:", zadania[i].txt);
+            if (n) zadania[i].txt = n;
+        }
+    }
+    render();
+}
+
+function licz() {
+    var ok = 0;
+    for (var i = 0; i < zadania.length; i++) {
+        if (zadania[i].spr) ok++;
+    }
+    document.getElementById("completedCounter").innerHTML = ok;
+    document.getElementById("uncompletedCounter").innerHTML = zadania.length - ok;
+}
+
+function setFilter(f) {
+    var wszystkie = document.querySelectorAll("#listContainer li");
+    for (var i = 0; i < wszystkie.length; i++) {
+        if (f == 'done' && !wszystkie[i].classList.contains("completed")) {
+            wszystkie[i].style.display = "none";
+        } else {
+            wszystkie[i].style.display = "flex";
+        }
+    }
 }
